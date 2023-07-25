@@ -16,7 +16,15 @@
       </div>
     </template>
     <template #rightCol>
-        <RegisterComponent />
+      <Transition 
+      enter-active-class="animate__animated animate__bounceInRight"
+      leave-active-class="animate__animated animate__bounceOutRight"
+      mode="out-in">
+        <component
+          :is="componentName"
+          @change-component="changeComponent"
+        ></component>
+      </Transition>
     </template>
   </TheTwoColumnsLayout>
 </template>
@@ -25,11 +33,23 @@
 // import TheTwoColumnsLayout from "../layouts/TheTwoColumnsLayout.vue"
 import TheTwoColumnsLayout from "@/layouts/TheTwoColumnsLayout";
 import RegisterComponent from "@/components/auth/Register";
+import LoginComponent from "@/components/auth/Login";
 export default {
   name: "HomePage",
   components: {
     TheTwoColumnsLayout,
     RegisterComponent,
+    LoginComponent,
+  },
+  data() {
+    return {
+      componentName: "RegisterComponent",
+    };
+  },
+  methods: {
+    changeComponent(payload) {
+      this.componentName = payload.componentName;
+    },
   },
 };
 </script>
