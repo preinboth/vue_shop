@@ -135,10 +135,11 @@ export default {
       };
       axios
         .post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`, signupDO
+          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`, 
+          signupDO
         )
         .then((response) => {
-          console.log(response);
+          console.log(response.status);
         })
         .catch((error) => {
           console.log(error);
