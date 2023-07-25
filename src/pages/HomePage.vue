@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import TheTwoColumnsLayout from "../layouts/TheTwoColumnsLayout.vue"
 import TheTwoColumnsLayout from "@/layouts/TheTwoColumnsLayout";
 import RegisterComponent from "@/components/auth/Register";
 import LoginComponent from "@/components/auth/Login";
