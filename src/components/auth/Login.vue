@@ -15,6 +15,7 @@
         >
       </p>
     </div>
+
     <div class="alert alert-danger col-md-8 offset-2" v-if="error">
       {{ errorDisplayText }}
     </div>
@@ -67,8 +68,7 @@
 <script>
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
-import axios from "axios";
-import { FIREBASE_API_KEY } from "@/config/firebase";
+
 
 export default {
   name: "LoginComponent",
@@ -78,7 +78,7 @@ export default {
   },
   emits: {
     "change-component": (payload) => {
-      if (payload.componentName !== "LoginComponent") {
+      if (payload.componentName !== "RegisterComponent") {
         return false;
       }
       return true;
@@ -120,22 +120,18 @@ export default {
     submitData(values) {
       this.isLoading = true;
       this.error = "";
-      const signinDO = {
-        email: values.email,
-        password: values.password,
-        returnSecureToken: true,
-      };
-      axios
-        .post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`,
-          signinDO
-        )
-        .then((response) => {
-          console.log(response.status);
+
+      this.$store
+        .dispatch("signin", {
+          email: values.email,
+          password: values.password,
+        })
+        .then(() => {
           this.isLoading = false;
+          // this.changeComponent("LoginComponent");
         })
         .catch((error) => {
-          this.error = error.response.data.error.message;
+          this.error = error.message;
           this.isLoading = false;
         });
     },
