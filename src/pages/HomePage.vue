@@ -33,6 +33,7 @@
 import TheTwoColumnsLayout from "@/layouts/TheTwoColumnsLayout";
 import RegisterComponent from "@/components/auth/Register";
 import LoginComponent from "@/components/auth/Login";
+
 export default {
   name: "HomePage",
   components: {

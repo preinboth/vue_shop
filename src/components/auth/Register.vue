@@ -91,8 +91,6 @@
 <script>
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
-import axios from "axios";
-import { FIREBASE_API_KEY } from "@/config/firebase";
 
 export default {
   name: "RegisterComponent",
@@ -149,23 +147,18 @@ export default {
     submitData(values) {
       this.isLoading = true;
       this.error = "";
-      const signupDO = {
-        email: values.email,
-        password: values.password,
-        returnSecureToken: true,
-      };
-      axios
-        .post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`,
-          signupDO
-        )
-        .then((response) => {
-          console.log(response.status);
+
+      this.$store
+        .dispatch("signup", {
+          email: values.email,
+          password: values.password,
+        })
+        .then(() => {
           this.isLoading = false;
           this.changeComponent("LoginComponent");
         })
         .catch((error) => {
-          this.error = error.response.data.error.message;
+          this.error = error.message;
           this.isLoading = false;
         });
     },
