@@ -16,10 +16,11 @@
       </div>
     </template>
     <template #rightCol>
-      <Transition 
-      enter-active-class="animate__animated animate__bounceInRight"
-      leave-active-class="animate__animated animate__bounceOutRight"
-      mode="out-in">
+      <Transition
+        enter-active-class="animate__animated animate__bounceInRight"
+        leave-active-class="animate__animated animate__bounceOutRight"
+        mode="out-in"
+      >
         <component
           :is="componentName"
           @change-component="changeComponent"
@@ -41,6 +42,13 @@ export default {
     RegisterComponent,
     LoginComponent,
   },
+
+  // metaInfo: {
+  //   title: 'Meine App',
+  //   description: 'Dies ist meine Vue.js App',
+  // },
+  
+
   data() {
     return {
       componentName: "RegisterComponent",

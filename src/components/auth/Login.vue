@@ -128,7 +128,9 @@ export default {
         })
         .then(() => {
           this.isLoading = false;
-          // this.changeComponent("LoginComponent");
+          // Weiterleitung zum internen Bereich
+          // this.$router.push("/shop"); // keine Parameter möglich
+          this.$router.push({path: "/shop"});
         })
         .catch((error) => {
           this.error = error.message;
